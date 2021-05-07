@@ -1,0 +1,26 @@
+create table [Servis] (
+[id] int identity(1,1) primary key,
+[name] varchar(100) not null,
+[rashirenie] varchar(100) not null
+)
+create table [Login] (
+[id] int identity(1,1) primary key,
+[nameLogin] varchar (100) not null,
+[password] varchar(100) not null,
+[midname] varchar(100) null,
+[firstname] varchar(100) null,
+[calendar_id] int not null
+)
+create table [Calendar] (
+[id] int identity(1,1) primary key,
+[servis_id] int not null,
+[login_cal] varchar(100) not null,
+[password_cal] varchar(100) not null,
+)
+create table [Sobitie] (
+[id] int identity(1,1) primary key,
+[calendar_id] int not null,
+[name] varchar(100) not null,
+[opisanie] varchar(100) null,
+[data] date not null
+)
