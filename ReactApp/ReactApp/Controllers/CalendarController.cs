@@ -131,5 +131,28 @@ namespace ReactApp.Controllers
             }
             return new JsonResult("Удалено успешно");
         }
+
+        //Метод выведения названия сервисов
+        [Route("GetAllServisNames")]
+        public JsonResult GetAllServisNames()
+        {
+            string query = @"select name from dbo.Servis";
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("CalendarAppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myConnection = new SqlConnection(sqlDataSource))
+            {
+                myConnection.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myConnection))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+
+                    myReader.Close();
+                    myConnection.Close();
+                }
+            }
+            return new JsonResult(table);
+        }
     }
 }
